@@ -1,0 +1,21 @@
+{
+  "name": "helsinki_part3",
+  "version": "1.0.0",
+  "description": "all exericses in this part",
+  "main": "index.js",
+  "repository": "git@github.com:SonTrungTo/FSHelsinki_part3.git",
+  "author": "SonTrungTo <son.trung.to@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"No test specified\" && exit 1"
+  }
+}
