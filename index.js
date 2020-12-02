@@ -30,6 +30,7 @@ const generateId = () => {
     return Math.round(Math.random() * new Date().valueOf());
 };
 
+app.use(express.static('build'));
 app.use(cors());
 app.use(express.json());
 app.use(morgan('tiny'));
