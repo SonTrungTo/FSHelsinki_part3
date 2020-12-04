@@ -38,17 +38,17 @@ app.delete('/api/persons/:personId', (req, res, next) => {
     })
     .catch(error => next(error));
 });
-app.post('/api/persons', (req, res) => {
+app.post('/api/persons', (req, res, next) => {
     let newPerson = new Person(req.body);
     newPerson.save().then(result => {
         return res.json(result);
-    });
+    })
+    .catch(error => next(error));
 });
 app.put('/api/persons/:personId', (req, res, next) => {
     Person.findByIdAndUpdate(req.params.personId, {
-        name: req.body.name,
         number: req.body.number
-    }, {new: true})
+    }, {new: true, runValidators: true})
     .then(result => {
         return res.json(result);
     })
@@ -64,9 +64,18 @@ const unknownEndpoint = (req, res) => {
 const errorHandler = (err, req, res, next) => {
     console.error(err.name, err.message);
 
+    for (const errName in err.errors) {
+        if (err.errors[errName].message) {
+            let message = err.errors[errName].message;
+            return res.status(400).json({
+                error: message
+            });
+        }
+    }
+
     if (err.name === "CastError") {
-        return res.status(400).send({
-            error: 'Malformed personId endpoint'
+        return res.status(400).json({
+            error: err.message
         });
     }
 
