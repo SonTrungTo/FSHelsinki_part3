@@ -4,7 +4,7 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 const url = process.env.MONGO_URI;
 
-console.log("connecting to", url);
+console.log('connecting to', url);
 
 mongoose.connect(url, {
     useNewUrlParser: true,
@@ -21,14 +21,14 @@ const personSchema = new mongoose.Schema({
     name: {
         type: String,
         trim: true,
-        required: "Name is required",
+        required: 'Name is required',
         unique: true,
         minlength: 3
     },
     number: {
         type: String,
         trim: true,
-        required: "Number is required",
+        required: 'Number is required',
         match: [/\d{8,}/, 'Number has at least 8 digits']
     }
 });

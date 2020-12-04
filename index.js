@@ -19,40 +19,41 @@ app.get('/api/persons', (req, res) => {
 });
 app.get('/info', (req, res) => {
     Person.find({})
-    .then(result => {
-        res.send(`<p>Phonebook has info for ${result.length} people</p>
+        .then(result => {
+            res.send(`<p>Phonebook has info for ${result.length} people</p>
         <p>${new Date()}</p>`);
-    });
+        });
 });
 app.get('/api/persons/:personId', (req, res, next) => {
     Person.findById(req.params.personId)
-    .then(result => {
-        return res.json(result);
-    })
-    .catch(error => next(error));
+        .then(result => {
+            return res.json(result);
+        })
+        .catch(error => next(error));
 });
 app.delete('/api/persons/:personId', (req, res, next) => {
     Person.findByIdAndDelete(req.params.personId)
-    .then(result => {
-        return res.status(204).end();
-    })
-    .catch(error => next(error));
+        .then(result => {
+            return res.status(204).end();
+        })
+        .catch(error => next(error));
 });
 app.post('/api/persons', (req, res, next) => {
     let newPerson = new Person(req.body);
-    newPerson.save().then(result => {
-        return res.json(result);
-    })
-    .catch(error => next(error));
+    newPerson.save()
+        .then(result => {
+            return res.json(result);
+        })
+        .catch(error => next(error));
 });
 app.put('/api/persons/:personId', (req, res, next) => {
     Person.findByIdAndUpdate(req.params.personId, {
         number: req.body.number
-    }, {new: true, runValidators: true})
-    .then(result => {
-        return res.json(result);
-    })
-    .catch(error => next(error));
+    }, { new: true, runValidators: true })
+        .then(result => {
+            return res.json(result);
+        })
+        .catch(error => next(error));
 });
 
 const unknownEndpoint = (req, res) => {
@@ -73,7 +74,7 @@ const errorHandler = (err, req, res, next) => {
         }
     }
 
-    if (err.name === "CastError") {
+    if (err.name === 'CastError') {
         return res.status(400).json({
             error: err.message
         });

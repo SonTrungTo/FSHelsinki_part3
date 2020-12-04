@@ -16,6 +16,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "eslint": "^7.14.0",
     "nodemon": "^2.0.6"
   },
   "scripts": {
@@ -25,6 +26,7 @@
     "build:ui": "rm -rf build && cd ../FullStack2020_Helsinki/part2/phonebook/ && yarn build && cp -r build ../../../Helsinki_part3/.",
     "deploy": "git push heroku master",
     "production:full": "yarn build:ui && git add . && git commit -m uibuild && yarn deploy",
-    "logs:prod": "heroku logs --tail"
+    "logs:prod": "heroku logs --tail",
+    "lint": "eslint ."
   }
 }
