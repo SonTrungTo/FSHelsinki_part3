@@ -20,7 +20,7 @@ const personSchema = new mongoose.Schema({
     name: {
         type: String,
         trim: true,
-        required: "Name is required"
+        required: "Name is required" // This needs to be changed today...
     },
     number: {
         type: String,
